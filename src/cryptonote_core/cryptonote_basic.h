@@ -23,6 +23,7 @@
 #include "crypto/hash.h"
 #include "misc_language.h"
 #include "tx_extra.h"
+#include "ringct/rctTypes.h"
 
 
 namespace cryptonote
@@ -181,6 +182,7 @@ namespace cryptonote
   {
   public:
     std::vector<std::vector<crypto::signature> > signatures; //count signatures  always the same as inputs count
+    rct::rctSig rct_signatures;
 
     transaction();
     virtual ~transaction();
@@ -189,6 +191,7 @@ namespace cryptonote
     BEGIN_SERIALIZE_OBJECT()
       FIELDS(*static_cast<transaction_prefix *>(this))
 
+      if(version == 1){
       ar.tag("signatures");
       ar.begin_array();
       PREPARE_CUSTOM_VECTOR_SERIALIZATION(vin.size(), signatures);
@@ -217,6 +220,27 @@ namespace cryptonote
           ar.delimit_array();
       }
       ar.end_array();
+    }
+    else
+    {
+        ar.tag("rct_signatures");
+        if (!vin.empty())
+        {
+          ar.begin_object();
+          bool r = rct_signatures.serialize_rctsig_base(ar, vin.size(), vout.size());
+          if (!r || !ar.stream().good()) return false;
+          ar.end_object();
+          if (rct_signatures.type != rct::RCTTypeNull)
+          {
+            ar.tag("rctsig_prunable");
+            ar.begin_object();
+            r = rct_signatures.p.serialize_rctsig_prunable(ar, rct_signatures.type, vin.size(), vout.size(),
+                vin[0].type() == typeid(txin_to_key) ? boost::get<txin_to_key>(vin[0]).key_offsets.size() - 1 : 0);
+            if (!r || !ar.stream().good()) return false;
+              ar.end_object();
+          }
+        }
+    }
     END_SERIALIZE()
 
   private:
