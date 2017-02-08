@@ -2,11 +2,6 @@
     "targets": [
         {
             "target_name": "cryptonote",
-            'xcode_settings': {
-                'OTHER_CFLAGS': [
-                    '-ObjC'
-                ],
-            },
             "sources": [
                 "src/main.cc",
                 "src/cryptonote_core/cryptonote_format_utils.cpp",
