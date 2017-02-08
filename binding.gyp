@@ -2,6 +2,11 @@
     "targets": [
         {
             "target_name": "cryptonote",
+            'xcode_settings': {
+                'OTHER_CFLAGS': [
+                    '-ObjC'
+                ],
+            },
             "sources": [
                 "src/main.cc",
                 "src/cryptonote_core/cryptonote_format_utils.cpp",
@@ -20,21 +25,12 @@
                     "-lboost_date_time",
                 ]
             },
-            "cflags_cc!": [ "-fno-exceptions" ],
+            "cflags_cc!": [ "-fno-exceptions", "-fno-rtti" ],
             "cflags_cc": [
                   "-std=c++0x",
                   "-fexceptions",
                   "-frtti",
             ],
         }
-    ],
-    'conditions': 
-      [
-        [
-          'OS=="mac"',
-          {
-            'xcode_settings': { 'GCC_ENABLE_CPP_RTTI': 'YES' }
-          },
-        ]
-      ]
+    ]
 }
