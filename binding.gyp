@@ -31,7 +31,7 @@
     "conditions": [
         ['OS=="mac"', {
           'xcode_settings': {
-            'MACOSX_DEPLOYMENT_TARGET': '10.9',
+            'MACOSX_DEPLOYMENT_TARGET': '10.12.3',
             'OTHER_CFLAGS': [
               '-fno-strict-aliasing',
               '-std=c++11',
