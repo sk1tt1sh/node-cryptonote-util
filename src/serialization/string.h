@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #pragma once
-#include <memory>
+#include <tr1/memory>
 #include "serialization.h"
 
 template <template <bool> class Archive>
