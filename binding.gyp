@@ -27,5 +27,17 @@
                   "-frtti",
             ],
         }
-    ]
+    ],
+    "conditions": [
+        ['OS=="mac"', {
+          'xcode_settings': {
+            'MACOSX_DEPLOYMENT_TARGET': '10.9',
+            'OTHER_CFLAGS': [
+              '-fno-strict-aliasing',
+              '-std=c++11',
+              '-stdlib=libc++'
+            ]
+          }
+        }]
+      ]
 }
