@@ -20,7 +20,7 @@
                     "-lboost_date_time",
                 ]
             },
-            "cflags_cc!": [ "-fno-exceptions", "-fno-rtti" ],
+            "cflags_cc!": [ "-fno-exceptions" ],
             "cflags_cc": [
                   "-std=c++0x",
                   "-fexceptions",
