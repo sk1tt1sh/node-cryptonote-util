@@ -3,11 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #pragma once
-#if __cplusplus < 201103L
-#include <tr1/memory>
-#else
 #include <memory>
-#endif
 #include "serialization.h"
 
 template <template <bool> class Archive>
