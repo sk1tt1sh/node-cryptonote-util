@@ -27,5 +27,20 @@
                   "-frtti",
             ],
         }
+    ],
+    "conditions": [
+        [
+        "OS=='mac'", {
+          "libraries": [
+            "-L/usr/local/lib"
+          ],
+          "xcode_settings": {
+            "MACOSX_DEPLOYMENT_TARGET": "10.7",
+            "OTHER_CPLUSPLUSFLAGS": [
+              "-stdlib=libc++"
+            ]
+          }
+        }
+      ]
     ]
 }
